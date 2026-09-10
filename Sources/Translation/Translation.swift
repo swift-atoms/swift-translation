@@ -1,5 +1,3 @@
-/// A displacement packaged as an operation. An integration layer supplies
-/// the relationship to the points on which the operation acts.
 public struct Translation<Displacement> {
     public let offset: Displacement
     public init(offset: Displacement) { self.offset = offset }
@@ -33,6 +31,6 @@ extension Translation: Codable where Displacement: Codable {}
 #endif
 
 extension Translation {
-    /// Constructs a translation by the supplied displacement.
+
     public init(by displacement: Displacement) { self.init(offset: displacement) }
 }
