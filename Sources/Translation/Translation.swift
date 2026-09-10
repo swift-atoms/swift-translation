@@ -4,9 +4,6 @@ public struct Translation<Displacement> {
     public let offset: Displacement
     public init(offset: Displacement) { self.offset = offset }
 
-    /// Constructs a translation by the supplied displacement.
-    public init(by displacement: Displacement) { self.init(offset: displacement) }
-
     public func composed<Failure: Swift.Error>(
         with next: Self,
         using combine: (Displacement, Displacement) throws(Failure) -> Displacement
@@ -34,3 +31,8 @@ extension Translation where Displacement: AdditiveArithmetic {
 #if !hasFeature(Embedded)
 extension Translation: Codable where Displacement: Codable {}
 #endif
+
+extension Translation {
+    /// Constructs a translation by the supplied displacement.
+    public init(by displacement: Displacement) { self.init(offset: displacement) }
+}
