@@ -9,7 +9,7 @@ let package = Package(
         .trait(name: "Affine", description: "Affine integration"),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-atoms/swift-affine.git", branch: "main", traits: ["default", .trait(name: "Tagged", condition: .when(traits: ["Affine"])), .trait(name: "Vector", condition: .when(traits: ["Affine"]))]),
+        .package(url: "https://github.com/swift-atoms/swift-affine.git", branch: "main", traits: [.trait(name: "Tagged", condition: .when(traits: ["Affine"])), .trait(name: "Vector", condition: .when(traits: ["Affine"]))]),
         .package(url: "https://github.com/swift-atoms/swift-displacement.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-vector.git", branch: "main"),
     ],
