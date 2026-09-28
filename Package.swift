@@ -5,12 +5,18 @@ let package = Package(
     name: "swift-translation",
     platforms: [.macOS(.v27), .iOS(.v27), .tvOS(.v27), .watchOS(.v27), .visionOS(.v27)],
     products: [.library(name: "Translation", targets: ["Translation"])],
+    traits: [
+        .trait(name: "Affine", description: "Affine integration"),
+    ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-affine.git", branch: "main", traits: ["default", .trait(name: "Tagged", condition: .when(traits: ["Affine"])), .trait(name: "Vector", condition: .when(traits: ["Affine"]))]),
         .package(url: "https://github.com/swift-atoms/swift-displacement.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-vector.git", branch: "main"),
     ],
     targets: [
         .target(name: "Translation", dependencies: [
+                .product(name: "Displacement", package: "swift-displacement", condition: .when(traits: ["Affine"])),
+                .product(name: "Affine", package: "swift-affine", condition: .when(traits: ["Affine"])),
 
         ]),
         .testTarget(name: "Translation Tests", dependencies: [
