@@ -1,15 +1,18 @@
 public struct Translation<Displacement> {
     public let offset: Displacement
     public init(offset: Displacement) { self.offset = offset }
+}
 
-    public func composed<Failure: Swift.Error>(
+extension Translation {
+
+    public func composed<Failure: Swift::Error>(
         with next: Self,
         using combine: (Displacement, Displacement) throws(Failure) -> Displacement
     ) throws(Failure) -> Self {
         Self(offset: try combine(offset, next.offset))
     }
 
-    public func inverted<Failure: Swift.Error>(
+    public func inverted<Failure: Swift::Error>(
         using inverse: (Displacement) throws(Failure) -> Displacement
     ) throws(Failure) -> Self {
         Self(offset: try inverse(offset))

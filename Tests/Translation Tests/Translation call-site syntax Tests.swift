@@ -20,7 +20,7 @@ import Translation
     }
 
     @Test func `Temporal translations reuse native duration syntax`() {
-        let delay: Translation<Swift.Duration> = .init(by: .seconds(3))
+        let delay: Translation<Swift::Duration> = .init(by: .seconds(3))
 
         #expect(delay.offset == .seconds(3))
         #expect(delay.composed(with: .init(by: .seconds(2))).offset == .seconds(5))

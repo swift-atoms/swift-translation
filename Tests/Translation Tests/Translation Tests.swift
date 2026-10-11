@@ -12,7 +12,7 @@ import Vector
         #expect(first.composed(with: .identity) == first)
     }
     @Test func `Translations reuse native durations`() {
-        let operation = Translation(offset: Swift.Duration.seconds(3))
+        let operation = Translation(offset: Swift::Duration.seconds(3))
         #expect(operation.inverted().offset == .seconds(-3))
     }
 }
