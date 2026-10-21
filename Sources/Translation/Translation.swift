@@ -30,7 +30,7 @@ extension Translation where Displacement: AdditiveArithmetic {
 }
 
 #if !hasFeature(Embedded)
-extension Translation: Codable where Displacement: Codable {}
+    extension Translation: Codable where Displacement: Codable {}
 #endif
 
 extension Translation {
