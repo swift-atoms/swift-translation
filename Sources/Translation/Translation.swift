@@ -37,3 +37,39 @@ extension Translation {
 
     public init(by displacement: Displacement) { self.init(offset: displacement) }
 }
+
+#if Affine
+    public import Affine
+
+    extension Translation {
+        public func applying<Point, Failure: Swift::Error>(
+            to point: Point,
+            using affine: Affine<Point, Displacement, Failure>
+        ) throws(Failure) -> Point {
+            try affine.translated(point, by: offset)
+        }
+
+    }
+#endif
+
+#if Affine
+    public import Displacement
+
+    extension Translation {
+        public init<Scalar>(dx: Scalar)
+        where Displacement == Displacement::Displacement<1, Scalar> {
+            self.init(by: Displacement(dx: dx))
+        }
+
+        public init<Scalar>(dx: Scalar, dy: Scalar)
+        where Displacement == Displacement::Displacement<2, Scalar> {
+            self.init(by: Displacement(dx: dx, dy: dy))
+        }
+
+        public init<Scalar>(dx: Scalar, dy: Scalar, dz: Scalar)
+        where Displacement == Displacement::Displacement<3, Scalar> {
+            self.init(by: Displacement(dx: dx, dy: dy, dz: dz))
+        }
+
+    }
+#endif
